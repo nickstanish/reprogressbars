@@ -1,0 +1,67 @@
+{
+  "name": "reprogressbars",
+  "version": "0.1.0",
+  "description": "React progress bars",
+  "main": "lib/index",
+  "jsnext:main": "es6/index",
+  "scripts": {
+    "build": "npm run build-cjs && npm run build-es6 && rimraf umd && npm run build-umd && npm run build-min",
+    "build-cjs": "rimraf lib && babel ./src -d lib",
+    "build-es6": "rimraf es6 && babel ./src -d es6 --blacklist=es6.modules",
+    "build-umd": "webpack --env=development src/index.js umd/Reprogressbars.js",
+    "build-min": "webpack --env=production src/index.js umd/Reprogressbars.min.js",
+    "lint": "eslint src",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "demo": "webpack-dev-server --progress --port 3000 --content-base demo --inline --config demo/webpack.config.js"
+  },
+  "files": [
+    "*.md",
+    "demo",
+    "es6",
+    "lib",
+    "umd",
+    "src"
+  ],
+  "keywords": [
+    "react",
+    "progress",
+    "bar",
+    "loading",
+    "react-component"
+  ],
+  "author": "Nick Stanish",
+  "license": "MIT",
+  "dependencies": {
+    "classnames": "^2.2.5",
+    "shifty": "^1.5.4"
+  },
+  "peerDependencies": {
+    "react": "^0.14.0 || ^15.0.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.18.0",
+    "babel-core": "^6.18.2",
+    "babel-eslint": "^7.0.0",
+    "babel-loader": "^6.2.8",
+    "babel-plugin-transform-class-properties": "^6.19.0",
+    "babel-plugin-transform-decorators-legacy": "^1.3.4",
+    "babel-plugin-transform-export-extensions": "^6.8.0",
+    "babel-plugin-transform-function-bind": "^6.8.0",
+    "babel-plugin-transform-object-rest-spread": "^6.19.0",
+    "babel-polyfill": "^6.16.0",
+    "babel-preset-es2015": "^6.18.0",
+    "babel-preset-react": "^6.16.0",
+    "eslint": "^3.8.1",
+    "eslint-config-airbnb": "^12.0.0",
+    "eslint-plugin-import": "^1.16.0",
+    "eslint-plugin-jsx-a11y": "^2.2.0",
+    "eslint-plugin-react": "^6.4.1",
+    "react": "^15.4.1",
+    "react-dom": "^15.4.1",
+    "react-hot-loader": "^1.3.0",
+    "react-router": "^2.5.0",
+    "rimraf": "^2.5.3",
+    "webpack": "2.1.0-beta.25",
+    "webpack-dev-server": "2.1.0-beta.10"
+  }
+}
