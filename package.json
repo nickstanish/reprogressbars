@@ -1,18 +1,20 @@
 {
   "name": "reprogressbars",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "React progress bars",
   "main": "lib/index",
   "jsnext:main": "es6/index",
   "scripts": {
-    "build": "npm run build-cjs && npm run build-es6 && rimraf umd && npm run build-umd && npm run build-min",
+    "build": "npm run build-cjs && npm run build-es6 && rimraf umd && npm run build-umd && npm run build-min && npm run build-ghpages",
     "build-cjs": "rimraf lib && babel ./src -d lib",
     "build-es6": "rimraf es6 && babel ./src -d es6 --blacklist=es6.modules",
     "build-umd": "webpack --env=development src/index.js umd/Reprogressbars.js",
     "build-min": "webpack --env=production src/index.js umd/Reprogressbars.min.js",
+    "build-ghpages": "webpack --config ghpages/webpack.config.js",
     "lint": "eslint src",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "demo": "webpack-dev-server --progress --port 3000 --content-base demo --inline --config demo/webpack.config.js"
+    "demo": "webpack-dev-server --progress --port 3000 --content-base demo --inline --config demo/webpack.config.js",
+    "ghpages": "webpack-dev-server --progress --port 8000 --content-base ghpages --inline --config ghpages/webpack.config.js"
   },
   "files": [
     "*.md",

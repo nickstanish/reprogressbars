@@ -1,0 +1,60 @@
+<html>
+  <head>
+    <title>Reprogressbars Demo</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+        font-size: 18px;
+        line-height: 1.3;
+        color: #2d2d2d;
+        margin: 0;
+        padding: 0;
+      }
+
+      .fixed-progress-bar {
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+      }
+
+      #content {
+        margin: 15px auto;
+        max-width: 1200px;
+        padding: 0 15px;
+      }
+
+      h1 {
+        font-weight: 600;
+        font-size: 2rem;
+      }
+
+      #root {
+        margin: 15px;
+        text-align: center;
+      }
+
+      button {
+        border: 1px solid #d2d2d2;
+        background-color: transparent;
+        padding: 16px 12px;
+        font-size: 24px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="content">
+      <h1>Reprogressbars</h1>
+      <p>Simpler React progress bars.</p>
+      <div id="gh-buttons">
+        <a class="github-button" href="https://github.com/nickstanish/reprogressbars" data-style="mega" aria-label="Star nickstanish/reprogressbars on GitHub">Star</a>
+      </div>
+      <div id="root"></div>
+    </div>
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <script src="./build/bundle.js"></script>
+  </body>
+
+</html>

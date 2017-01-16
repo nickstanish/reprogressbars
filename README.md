@@ -13,6 +13,8 @@ The main purpose of this library is to simplify displaying progress from ajax re
 ## Examples
 
 ```jsx
+import { ProgressBar } from 'reprogressbars';
+
 <ProgressBar isLoading={this.state.isLoading} />
 ```
 
@@ -40,7 +42,9 @@ You can also change the height or color:
 <ProgressBar isLoading={this.state.isLoading} height="4px" color="#B71C1C" />
 ```
 
+## API
 
+See [docs](https://github.com/nickstanish/reprogressbars/tree/master/docs)
 
 
 ## Contribution

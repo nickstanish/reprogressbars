@@ -1,17 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { ProgressBar, withProgress } from 'reprogressbars';
-
-@withProgress
-class CustomProgressBar extends Component {
-  render() {
-    return (
-      <div>
-        Loading percentage: {this.props.progress.value.toFixed(1)}%
-      </div>
-    );
-  }
-}
+import { ProgressBar } from 'reprogressbars';
 
 class App extends Component {
   constructor(props) {
@@ -26,19 +15,10 @@ class App extends Component {
     });
   }
   render() {
-    const options = {
-      isLoading: this.state.isLoading,
-      className: "fixed-progress-bar",
-      color: "#B71C1C",
-      height: "2px",
-      useBoxShadow: true
-    };
-
     return (
       <div>
-        <ProgressBar {...options} />
+        <ProgressBar isLoading={this.state.isLoading} className="fixed-progress-bar" color="#4285F4" height="4px" />
         <button onClick={() => this.toggleLoading()}>{ this.state.isLoading ? 'End Loading' : 'Begin Loading'}</button>
-        <CustomProgressBar isLoading={this.state.isLoading} />
       </div>);
   }
 }
