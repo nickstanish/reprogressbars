@@ -10,11 +10,11 @@
     "build-es6": "rimraf es6 && babel ./src -d es6 --blacklist=es6.modules",
     "build-umd": "webpack --env=development src/index.js umd/Reprogressbars.js",
     "build-min": "webpack --env=production src/index.js umd/Reprogressbars.min.js",
-    "build-ghpages": "webpack --config ghpages/webpack.config.js",
+    "build-ghpages": "webpack --config docs/webpack.config.js",
     "lint": "eslint src",
     "test": "echo \"Error: no test specified\" && exit 1",
     "demo": "webpack-dev-server --progress --port 3000 --content-base demo --inline --config demo/webpack.config.js",
-    "ghpages": "webpack-dev-server --progress --port 8000 --content-base ghpages --inline --config ghpages/webpack.config.js"
+    "ghpages": "webpack-dev-server --progress --port 8000 --content-base docs --inline --config docs/webpack.config.js"
   },
   "files": [
     "*.md",
