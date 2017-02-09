@@ -9,18 +9,19 @@ export default class ProgressProvider extends Component {
 
   constructor(props) {
     super(props);
-
-    this._tweenable = new Tweenable();
-
     this.state = {
-      active: props.isLoading,
+      active: false,
       value: 0
     };
+  }
 
-    if (props.isLoading) {
+  componentDidMount() {
+    this._tweenable = new Tweenable();
+    if (this.props.isLoading) {
       this.begin();
     }
   }
+
   componentWillReceiveProps(nextProps) {
     if (!this.props.isLoading && nextProps.isLoading) {
       this.begin();
@@ -28,6 +29,12 @@ export default class ProgressProvider extends Component {
       this.finish();
     }
   }
+
+  componentWillUnmount() {
+    this._tweenable.stop();
+    this._tweenable = null;
+  }
+
   begin() {
     this._tweenable.stop();
     this.setState({
@@ -37,7 +44,7 @@ export default class ProgressProvider extends Component {
 
     this._tweenable.tween({
       from: { value: 0 },
-      to: { value: 70 },
+      to: { value: 45 },
       duration: 2000,
       easing: 'easeOutQuad',
       step: () => this.updateValue(),
@@ -45,7 +52,7 @@ export default class ProgressProvider extends Component {
         this.updateValue();
         this._tweenable.tween({
           from: { value: this._tweenable.get().value },
-          to: { value: 85 },
+          to: { value: 80 },
           duration: 20000,
           easing: 'easeOutQuad',
           step: () => this.updateValue(),
