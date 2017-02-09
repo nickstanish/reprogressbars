@@ -1,3 +1,7 @@
+# 0.2.1
+- [Fix] Don't set state before component is mounted
+- [Fix] Add yarn.lock
+
 # 0.2.0
 - [Breaking] No longer export ProgressBar as default
 - [Feature] Add withProgress HOC to enable custom bars
