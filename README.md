@@ -34,7 +34,7 @@ For a progress bar fixed to the top of your page:
 }
 ```
 
-The `isLoading` prop makes for simple integration with redux.
+The `isLoading` prop makes for simple integration with [Redux](https://github.com/nickstanish/reprogressbars/wiki/Redux-Usage).
 
 You can also change the height or color:
 
