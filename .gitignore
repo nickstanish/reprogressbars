@@ -4,3 +4,5 @@ node_modules
 umd
 lib
 es6
+
+yarn.lock
