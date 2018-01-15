@@ -3,14 +3,11 @@ node_js:
   - '6'
   - '7'
 install: npm install
+script:
+  - npm run build
+  - npm run test-with-coverage
+  - npm run report-coverage
+  - npm run lint
 cache:
   directories:
     - node_modules
-jobs:
-  include:
-    - stage: Tests
-      script: npm run build
-    - script: npm run lint
-    - script: npm run test-with-coverage
-    - stage: Code Coverage
-      script: npm run report-coverage
