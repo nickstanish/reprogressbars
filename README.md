@@ -3,6 +3,7 @@
 [![npm version](https://badge.fury.io/js/reprogressbars.svg)](http://badge.fury.io/js/reprogressbars)
 [![npm downloads](https://img.shields.io/npm/dm/reprogressbars.svg?style=flat-square)](https://www.npmjs.com/package/reprogressbars)
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](https://github.com/nickstanish/reprogressbars/raw/master/LICENSE)
+[![Build Status](https://travis-ci.org/nickstanish/reprogressbars.svg?branch=master)](https://travis-ci.org/nickstanish/reprogressbars)
 
 ## Intro
 
