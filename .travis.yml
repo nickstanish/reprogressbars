@@ -1,0 +1,13 @@
+language: node_js
+node_js:
+  - '6'
+  - '7'
+install: npm install
+script:
+  - npm run build
+  - npm run test-with-coverage
+  - npm run report-coverage
+  - npm run lint
+cache:
+  directories:
+    - node_modules

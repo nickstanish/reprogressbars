@@ -1,5 +1,26 @@
-import React, { Component, PropTypes, Children } from 'react';
-import Tweenable from 'shifty';
+import React, { Component, Children } from 'react';
+import PropTypes from 'prop-types';
+import { Tweenable } from 'shifty';
+
+const stepsConfig = {
+  initial: {
+    to: { value: 45 },
+    duration: 2000,
+    easing: 'easeOutQuad'
+  },
+  slow: {
+    to: { value: 80 },
+    duration: 20000,
+    easing: 'easeOutQuad',
+  },
+  finish: {
+    to: { value: 100 },
+    duration: 200,
+    easing: 'easeOutQuad'
+  }
+};
+
+const noOp = () => {};
 
 export default class ProgressProvider extends Component {
   static propTypes = {
@@ -17,6 +38,7 @@ export default class ProgressProvider extends Component {
 
   componentDidMount() {
     this._tweenable = new Tweenable();
+
     if (this.props.isLoading) {
       this.begin();
     }
@@ -31,56 +53,51 @@ export default class ProgressProvider extends Component {
   }
 
   componentWillUnmount() {
-    this._tweenable.stop();
+    this.stop();
+    this._tweenable.dispose();
     this._tweenable = null;
   }
 
+  stop() {
+    if (this._tweenable.isPlaying()) {
+      this._tweenable.stop();
+    }
+  }
+
   begin() {
-    this._tweenable.stop();
+    this.stop();
     this.setState({
       active: true,
       value: 0
     });
 
-    this._tweenable.tween({
-      from: { value: 0 },
-      to: { value: 45 },
-      duration: 2000,
-      easing: 'easeOutQuad',
-      step: () => this.updateValue(),
-      finish: () => {
-        this.updateValue();
-        this._tweenable.tween({
-          from: { value: this._tweenable.get().value },
-          to: { value: 80 },
-          duration: 20000,
-          easing: 'easeOutQuad',
-          step: () => this.updateValue(),
-          finish: () => this.updateValue()
-        });
-      }
+    const fromValue = {
+      from: { value: 0 }
+    };
+
+    this.tween({ ...stepsConfig.initial, ...fromValue })
+      .then(() => this.tween(stepsConfig.slow)).catch(noOp);
+  }
+  tween(config) {
+    this._tweenable.setConfig({
+      ...config,
+      step: state => this.updateValue(state)
     });
+    return this._tweenable.tween();
   }
   finish() {
-    this._tweenable.stop();
-    this._tweenable.tween({
-      from: { value: this.state.value },
-      to: { value: 100 },
-      duration: 200,
-      easing: 'easeOutQuad',
-      step: () => this.updateValue(),
-      finish: () => {
-        this.setState({
-          value: this._tweenable.get().value,
-          active: false
-        });
-      }
+    this.stop();
+    this.tween(stepsConfig.finish).then(() => {
+      this.setState({
+        value: this._tweenable.get().value,
+        active: false
+      });
     });
   }
 
-  updateValue() {
+  updateValue({ value }) {
     this.setState({
-      value: this._tweenable.get().value
+      value
     });
   }
   render() {

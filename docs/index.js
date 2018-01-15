@@ -1,6 +1,19 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { ProgressBar } from 'reprogressbars';
+import { ProgressBar, withProgress } from 'reprogressbars';
+
+@withProgress
+class CustomProgressBar extends Component {
+  render() {
+    return (
+      <div>
+        <p>Progress active: {JSON.stringify(this.props.progress.active)}</p>
+        <p>Loading percentage: {this.props.progress.value.toFixed(1)}%</p>
+      </div>
+    );
+  }
+}
+
 
 class App extends Component {
   constructor(props) {
@@ -9,16 +22,48 @@ class App extends Component {
       isLoading: false
     };
   }
+
   toggleLoading() {
+    this.clearTimeout();
     this.setState({
       isLoading: !this.state.isLoading
     });
   }
+
+  clearTimeout() {
+    if (this.timeout) {
+      window.clearInterval(this.timeout);
+    }
+  }
+
+  loadFor(time) {
+    this.clearTimeout();
+    this.timeout = window.setInterval(() => {
+      this.setState({
+        isLoading: false
+      });
+    }, time);
+
+    this.setState({
+      isLoading: true
+    });
+  }
+
   render() {
     return (
       <div>
         <ProgressBar isLoading={this.state.isLoading} className="fixed-progress-bar" color="#4285F4" height="4px" />
-        <button onClick={() => this.toggleLoading()}>{ this.state.isLoading ? 'End Loading' : 'Begin Loading'}</button>
+        <div className="button-row">
+          <button onClick={() => this.loadFor(200)}>Fast load</button>
+          <button onClick={() => this.loadFor(1500)}>Slow load</button>
+          <button onClick={() => this.loadFor(4000)}>Really slow load</button>
+        </div>
+        <div className="button-row">
+          <button onClick={() => this.toggleLoading()}>{ this.state.isLoading ? 'End Loading' : 'Begin Loading'}</button>
+        </div>
+        <div>
+          <CustomProgressBar isLoading={this.state.isLoading} />
+        </div>
       </div>);
   }
 }
