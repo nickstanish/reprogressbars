@@ -1,6 +1,6 @@
 {
   "name": "reprogressbars",
-  "version": "0.2.1",
+  "version": "1.0.0",
   "description": "React progress bars",
   "main": "lib/index",
   "jsnext:main": "es6/index",
@@ -16,6 +16,10 @@
     "test": "NODE_ENV=test ava",
     "test-with-coverage": "NODE_ENV=test nyc --all ava",
     "report-coverage": "nyc report --reporter=lcov > coverage.lcov && codecov"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:nickstanish/reprogressbars.git"
   },
   "files": [
     "*.md",

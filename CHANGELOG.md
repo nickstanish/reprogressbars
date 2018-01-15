@@ -1,3 +1,6 @@
+# 1.0.0
+Added tests and upgraded packages
+
 # 0.2.1
 - [Fix] Don't set state before component is mounted
 - [Fix] Add yarn.lock
