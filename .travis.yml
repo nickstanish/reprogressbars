@@ -5,7 +5,14 @@ node_js:
 install: npm install
 cache:
   directories:
-    - "node_modules"
-script:
-  - npm run build
-  - npm run test-with-coverage
+    - node_modules
+jobs:
+  include:
+    - stage: build
+      script: npm run build
+    - stage: test
+      script:
+          - npm run test-with-coverage
+          - npm run report-coverage
+    - stage: lint
+      script: npm run lint
