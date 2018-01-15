@@ -13,7 +13,9 @@
     "build-min": "webpack --env=production src/index.js umd/Reprogressbars.min.js",
     "build-ghpages": "webpack  --env=production --config docs/webpack.config.js",
     "lint": "eslint src/**/*.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "NODE_ENV=test ava",
+    "test-with-coverage": "NODE_ENV=test nyc --all ava",
+    "report-coverage": "nyc report --reporter=lcov > coverage.lcov && codecov"
   },
   "files": [
     "*.md",
@@ -32,6 +34,24 @@
   ],
   "author": "Nick Stanish",
   "license": "MIT",
+  "ava": {
+    "require": [
+      "babel-register",
+      "babel-polyfill",
+      "./test/helpers/setup-browser-env.js"
+    ],
+    "babel": "inherit"
+  },
+  "nyc": {
+    "include": [
+      "src/**/*.js"
+    ],
+    "require": [
+      "babel-register"
+    ],
+    "sourceMap": false,
+    "instrument": false
+  },
   "dependencies": {
     "classnames": "^2.2.5",
     "prop-types": "^15.6.0",
