@@ -1,5 +1,5 @@
-export Bar from './components/Bar';
-export ProgressBar from './components/ProgressBar';
-export ProgressProvider from './components/ProgressProvider';
+export { default as Bar } from './components/Bar';
+export { default as ProgressBar } from './components/ProgressBar';
+export { default as ProgressProvider } from './components/ProgressProvider';
 
-export withProgress from './hoc/withProgress';
+export { default as withProgress } from './hoc/withProgress';

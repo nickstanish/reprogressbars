@@ -1,8 +1,10 @@
-var path = require('path');
-var webpack = require('webpack');
+const path = require('path');
+const webpack = require('webpack');
+const { LoaderOptionsPlugin } = webpack;
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = function (env) {
-  var config = {
+  const config = {
     entry: './src/index.js',
 
     output: {
@@ -11,20 +13,14 @@ module.exports = function (env) {
     },
 
     module: {
-      loaders: [{
+      rules: [{
         test: /\.(js)$/,
         exclude: /node_modules/,
         include: [
           path.resolve(__dirname, 'src'),
         ],
-        loader: 'babel'
+        loader: 'babel-loader'
       }],
-    },
-
-    resolve: {
-      alias: {
-        react: path.resolve(__dirname, './node_modules/react')
-      }
     },
 
     externals: {
@@ -44,20 +40,32 @@ module.exports = function (env) {
   };
 
   if (env === 'production') {
-    config.plugins.push(
-      new webpack.optimize.UglifyJsPlugin({
-        compressor: {
-          pure_getters: true,
-          unsafe: true,
-          unsafe_comps: true,
-          warnings: false,
-        },
-        output: {
-          comments: false,
-        },
-        sourceMap: false,
-      })
-    );
+    config.plugins = [
+      ...config.plugins,
+      new LoaderOptionsPlugin({
+        minimize: true,
+        debug: false
+      }),
+      new UglifyJsPlugin({
+        uglifyOptions: {
+          compress: {
+            conditionals: true,
+            unused: true,
+            comparisons: true,
+            sequences: true,
+            dead_code: true,
+            evaluate: true,
+            if_return: true,
+            join_vars: true
+          },
+          output: {
+            comments: false
+          },
+          sourceMap: false,
+        }
+      }),
+      new webpack.HashedModuleIdsPlugin()
+    ];
   }
 
   return config;

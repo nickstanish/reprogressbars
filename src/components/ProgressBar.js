@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import ProgressProvider from './ProgressProvider';
 import Bar from './Bar';
 
@@ -12,21 +13,19 @@ function only(originalObject, keys) {
   return newObject;
 }
 
-export default class ProgressBar extends Component {
-  static propTypes = {
-    color: PropTypes.string,
-    height: PropTypes.string,
-    isLoading: PropTypes.bool,
-    className: PropTypes.string,
-    useBoxShadow: PropTypes.bool
-  };
-
-  render() {
-    const barProps = only(this.props, ['color', 'height', 'className', 'useBoxShadow']);
-    return (
-      <ProgressProvider isLoading={this.props.isLoading}>
-        <Bar {...barProps} />
-      </ProgressProvider>
-    );
-  }
+export default function ProgressBar(props) {
+  const barProps = only(props, ['color', 'height', 'className', 'useBoxShadow']);
+  return (
+    <ProgressProvider isLoading={props.isLoading}>
+      <Bar {...barProps} />
+    </ProgressProvider>
+  );
 }
+
+ProgressBar.propTypes = {
+  color: PropTypes.string,
+  height: PropTypes.string,
+  isLoading: PropTypes.bool,
+  className: PropTypes.string,
+  useBoxShadow: PropTypes.bool
+};
