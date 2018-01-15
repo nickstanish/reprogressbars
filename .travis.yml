@@ -8,11 +8,9 @@ cache:
     - node_modules
 jobs:
   include:
-    - stage: build
+    - stage: Tests
       script: npm run build
-    - stage: test
-      script:
-          - npm run test-with-coverage
-          - npm run report-coverage
-    - stage: lint
-      script: npm run lint
+    - script: npm run lint
+    - script: npm run test-with-coverage
+    - stage: Code Coverage
+      script: npm run report-coverage
