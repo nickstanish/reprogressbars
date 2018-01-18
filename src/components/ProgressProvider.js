@@ -92,7 +92,7 @@ export default class ProgressProvider extends Component {
         value: this._tweenable.get().value,
         active: false
       });
-    });
+    }).catch(noOp);
   }
 
   updateValue({ value }) {

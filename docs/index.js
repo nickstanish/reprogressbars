@@ -36,16 +36,22 @@ class App extends Component {
     }
   }
 
-  loadFor(time) {
-    this.clearTimeout();
-    this.timeout = window.setInterval(() => {
-      this.setState({
-        isLoading: false
-      });
-    }, time);
+  queueMultiple() {
+    this.loadFor(500).then(() => this.loadFor(500));
+  }
 
-    this.setState({
-      isLoading: true
+  loadFor(time) {
+    return new Promise((resolve, reject) => {
+      this.clearTimeout();
+      this.timeout = window.setInterval(() => {
+        this.setState({
+          isLoading: false
+        }, resolve);
+      }, time);
+
+      this.setState({
+        isLoading: true
+      });
     });
   }
 
@@ -57,6 +63,7 @@ class App extends Component {
           <button onClick={() => this.loadFor(200)}>Fast load</button>
           <button onClick={() => this.loadFor(1500)}>Slow load</button>
           <button onClick={() => this.loadFor(4000)}>Really slow load</button>
+          <button onClick={() => this.queueMultiple()}>Chained</button>
         </div>
         <div className="button-row">
           <button onClick={() => this.toggleLoading()}>{ this.state.isLoading ? 'End Loading' : 'Begin Loading'}</button>
