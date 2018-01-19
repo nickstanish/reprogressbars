@@ -1,3 +1,6 @@
+# 1.0.1
+Fix for unresolved promise when chaining loads
+
 # 1.0.0
 Added tests and upgraded packages
 
