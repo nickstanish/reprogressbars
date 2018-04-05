@@ -1,13 +1,15 @@
 const path = require('path');
 const webpack = require('webpack');
-const { LoaderOptionsPlugin } = webpack;
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
-module.exports = function (env) {
+module.exports = function buildWebpackConfig(env) {
+  const filename = (env !== 'development') ? 'Reprogressbars.min.js' : 'Reprogressbars.js';
+
   const config = {
     entry: './src/index.js',
 
     output: {
+      filename,
+      path: path.resolve(__dirname, 'umd'),
       library: 'Reprogressbars',
       libraryTarget: 'umd',
     },
@@ -38,35 +40,6 @@ module.exports = function (env) {
       })
     ]
   };
-
-  if (env === 'production') {
-    config.plugins = [
-      ...config.plugins,
-      new LoaderOptionsPlugin({
-        minimize: true,
-        debug: false
-      }),
-      new UglifyJsPlugin({
-        uglifyOptions: {
-          compress: {
-            conditionals: true,
-            unused: true,
-            comparisons: true,
-            sequences: true,
-            dead_code: true,
-            evaluate: true,
-            if_return: true,
-            join_vars: true
-          },
-          output: {
-            comments: false
-          },
-          sourceMap: false,
-        }
-      }),
-      new webpack.HashedModuleIdsPlugin()
-    ];
-  }
 
   return config;
 };
