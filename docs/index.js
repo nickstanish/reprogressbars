@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { ProgressBar, withProgress } from 'reprogressbars';
 
-@withProgress
 class CustomProgressBar extends Component {
   render() {
     return (
@@ -14,6 +13,7 @@ class CustomProgressBar extends Component {
   }
 }
 
+const ConnectedProgressBar = withProgress(CustomProgressBar);
 
 class App extends Component {
   constructor(props) {
@@ -69,7 +69,7 @@ class App extends Component {
           <button onClick={() => this.toggleLoading()}>{ this.state.isLoading ? 'End Loading' : 'Begin Loading'}</button>
         </div>
         <div>
-          <CustomProgressBar isLoading={this.state.isLoading} />
+          <ConnectedProgressBar isLoading={this.state.isLoading} />
         </div>
       </div>);
   }

@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`withProgress wraps progress provider 1`] = `
+<ProgressBarProvider>
+  <ProgressProvider>
+    <Target
+      progress={
+        Object {
+          "active": false,
+          "value": 0,
+        }
+      }
+    >
+      <p>
+        0
+      </p>
+    </Target>
+  </ProgressProvider>
+</ProgressBarProvider>
+`;
