@@ -6,5 +6,6 @@ es6
 yarn.lock
 
 # code coverage
+coverage/
 .nyc_output
 coverage.lcov

@@ -2,20 +2,15 @@
   "name": "reprogressbars",
   "version": "1.0.1",
   "description": "React progress bars",
-  "main": "lib/index",
-  "jsnext:main": "es6/index",
+  "libraryName": "Reprogressbars",
+  "main": "dist/reprogressbars.umd.js",
+  "module": "dist/reprogressbars.esm.js",
   "scripts": {
-    "start": "webpack-dev-server --progress --inline --mode=development --config=docs/webpack.config.js",
-    "build": "npm run build-cjs && npm run build-es6 && rimraf umd && npm run build-umd && npm run build-min && npm run build-ghpages",
-    "build-cjs": "rimraf lib && babel ./src -d lib",
-    "build-es6": "rimraf es6 && babel ./src -d es6 --blacklist=es6.modules",
-    "build-umd": "webpack --config=webpack.config.js --env=development --mode=development",
-    "build-min": "webpack --config=webpack.config.js --env=production --mode=production",
-    "build-ghpages": "webpack  --env=production --mode=production --config=docs/webpack.config.js",
-    "lint": "eslint src/**/*.js",
-    "test": "NODE_ENV=test ava",
-    "test-with-coverage": "NODE_ENV=test nyc --all ava",
-    "report-coverage": "nyc report --reporter=lcov > coverage.lcov && codecov"
+    "start": "rollup -c -w",
+    "build": "rollup -c && npm run build-ghpages",
+    "build-ghpages": "echo \"TODO: Fix me\"",
+    "lint": "eslint src test --ext .jsx --ext .js",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -23,10 +18,7 @@
   },
   "files": [
     "*.md",
-    "demo",
-    "es6",
-    "lib",
-    "umd",
+    "dist",
     "src"
   ],
   "keywords": [
@@ -38,62 +30,62 @@
   ],
   "author": "Nick Stanish",
   "license": "MIT",
-  "ava": {
-    "require": [
-      "babel-register",
-      "babel-polyfill",
-      "./test/helpers/setup-browser-env.js"
+  "browserslist": [
+    "last 2 version",
+    "> 1%",
+    "maintained node versions",
+    "not dead"
+  ],
+  "jest": {
+    "setupFilesAfterEnv": [
+      "<rootDir>/test/helpers/setup.js"
     ],
-    "babel": "inherit"
-  },
-  "nyc": {
-    "include": [
-      "src/**/*.js"
+    "coverageDirectory": "<rootDir>/coverage",
+    "collectCoverageFrom": [
+      "**/*.{js,jsx}",
+      "!**/node_modules/**"
     ],
-    "require": [
-      "babel-register"
+    "coverageReporters": [
+      "lcov"
     ],
-    "sourceMap": false,
-    "instrument": false
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ],
+    "globals": {
+      "NODE_ENV": "test"
+    }
   },
   "dependencies": {
     "classnames": "^2.2.5",
     "prop-types": "^15.6.1",
-    "shifty": "^2.3.1"
+    "shifty": "2.3.1"
   },
   "peerDependencies": {
     "react": "^0.14.0 || ^15.0.0 || ^16.0.0"
   },
   "devDependencies": {
-    "ava": "^0.25.0",
-    "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.0",
-    "babel-eslint": "^8.2.2",
-    "babel-loader": "^7.1.4",
-    "babel-plugin-istanbul": "^4.1.5",
-    "babel-plugin-transform-class-properties": "^6.24.1",
-    "babel-plugin-transform-decorators-legacy": "^1.3.4",
-    "babel-polyfill": "^6.26.0",
-    "babel-preset-env": "^1.6.1",
-    "babel-preset-react": "^6.24.1",
-    "babel-preset-stage-3": "^6.24.1",
-    "browser-env": "^3.2.5",
-    "codecov": "^3.1.0",
-    "enzyme": "^3.3.0",
-    "enzyme-adapter-react-16": "^1.1.1",
+    "@babel/core": "^7.6.2",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/preset-env": "^7.6.2",
+    "@babel/preset-react": "^7.0.0",
+    "babel-eslint": "^10.0.3",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.14.0",
+    "enzyme-to-json": "^3.4.0",
     "eslint": "^4.19.1",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-plugin-import": "^2.10.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.7.0",
-    "nyc": "^11.6.0",
+    "jest": "^24.9.0",
     "react": "^16.3.1",
     "react-dom": "^16.3.1",
     "rimraf": "^2.6.2",
-    "sinon": "^4.5.0",
-    "uglifyjs-webpack-plugin": "^1.2.4",
-    "webpack": "^4.5.0",
-    "webpack-cli": "^2.0.14",
-    "webpack-dev-server": "^3.1.10"
+    "rollup": "^1.21.4",
+    "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-peer-deps-external": "^2.2.0",
+    "rollup-plugin-replace": "^2.2.0"
   }
 }
