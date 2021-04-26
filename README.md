@@ -59,4 +59,4 @@ Please create an issue for issues or bugs. Pull requests welcome.
 
 [MIT](http://opensource.org/licenses/MIT)
 
-Copyright (c) 2017-2018 Nick Stanish
+Copyright (c) 2017-2021 Nick Stanish
