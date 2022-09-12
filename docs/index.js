@@ -1,32 +1,29 @@
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import { ProgressBar, withProgress } from 'reprogressbars';
+import React, { Component } from "react";
+import ReactDOM from "react-dom";
+import { ProgressBar, withProgress } from "reprogressbars";
 
-@withProgress
-class CustomProgressBar extends Component {
-  render() {
-    return (
-      <div>
-        <p>Progress active: {JSON.stringify(this.props.progress.active)}</p>
-        <p>Loading percentage: {this.props.progress.value.toFixed(1)}%</p>
-      </div>
-    );
-  }
-}
-
+const TextProgress = (props) => {
+  return (
+    <div>
+      <p>Progress active: {JSON.stringify(props.progress.active)}</p>
+      <p>Loading percentage: {props.progress.value.toFixed(1)}%</p>
+    </div>
+  );
+};
+const ConnectedTextProgress = withProgress(TextProgress);
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLoading: false
+      isLoading: false,
     };
   }
 
   toggleLoading() {
     this.clearTimeout();
     this.setState({
-      isLoading: !this.state.isLoading
+      isLoading: !this.state.isLoading,
     });
   }
 
@@ -41,16 +38,19 @@ class App extends Component {
   }
 
   loadFor(time) {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       this.clearTimeout();
       this.timeout = window.setInterval(() => {
-        this.setState({
-          isLoading: false
-        }, resolve);
+        this.setState(
+          {
+            isLoading: false,
+          },
+          resolve
+        );
       }, time);
 
       this.setState({
-        isLoading: true
+        isLoading: true,
       });
     });
   }
@@ -58,7 +58,12 @@ class App extends Component {
   render() {
     return (
       <div>
-        <ProgressBar isLoading={this.state.isLoading} className="fixed-progress-bar" color="#4285F4" height="4px" />
+        <ProgressBar
+          isLoading={this.state.isLoading}
+          className="fixed-progress-bar"
+          color="#4285F4"
+          height="4px"
+        />
         <div className="button-row">
           <button onClick={() => this.loadFor(200)}>Fast load</button>
           <button onClick={() => this.loadFor(1500)}>Slow load</button>
@@ -66,16 +71,16 @@ class App extends Component {
           <button onClick={() => this.queueMultiple()}>Chained</button>
         </div>
         <div className="button-row">
-          <button onClick={() => this.toggleLoading()}>{ this.state.isLoading ? 'End Loading' : 'Begin Loading'}</button>
+          <button onClick={() => this.toggleLoading()}>
+            {this.state.isLoading ? "End Loading" : "Begin Loading"}
+          </button>
         </div>
         <div>
-          <CustomProgressBar isLoading={this.state.isLoading} />
+          <ConnectedTextProgress isLoading={this.state.isLoading} />
         </div>
-      </div>);
+      </div>
+    );
   }
 }
 
-
-ReactDOM.render((
-  <App />
-), document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById("root"));
