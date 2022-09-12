@@ -8,3 +8,5 @@ yarn.lock
 # code coverage
 .nyc_output
 coverage.lcov
+src/components/**/*.js
+src/**/*.map

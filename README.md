@@ -6,8 +6,6 @@
 [![Build Status](https://travis-ci.org/nickstanish/reprogressbars.svg?branch=master)](https://travis-ci.org/nickstanish/reprogressbars)
 [![minzipped size](https://badgen.net/bundlephobia/minzip/reprogressbars)](https://bundlephobia.com/result?p=reprogressbars)
 
-
-
 ## Intro
 
 Reprogressbars is a progress bar library built on React.
@@ -17,11 +15,10 @@ The main purpose of this library is to simplify displaying progress from ajax re
 ## Examples
 
 ```jsx
-import { ProgressBar } from 'reprogressbars';
+import { ProgressBar } from "reprogressbars";
 
-<ProgressBar isLoading={this.state.isLoading} />
+<ProgressBar isLoading={this.state.isLoading} />;
 ```
-
 
 For a progress bar fixed to the top of your page:
 
@@ -50,7 +47,6 @@ You can also change the height or color:
 
 See [docs](https://github.com/nickstanish/reprogressbars/tree/master/docs)
 
-
 ## Contribution
 
 Please create an issue for issues or bugs. Pull requests welcome.
@@ -59,4 +55,4 @@ Please create an issue for issues or bugs. Pull requests welcome.
 
 [MIT](http://opensource.org/licenses/MIT)
 
-Copyright (c) 2017-2021 Nick Stanish
+Copyright (c) 2017-2022 Nick Stanish

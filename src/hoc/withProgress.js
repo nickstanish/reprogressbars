@@ -1,19 +1,11 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import ProgressProvider from '../components/ProgressProvider';
-
-export default function withProgress(ProgressBarComponent) {
-  function ProgressBarProvider(props) {
-    return (
-      <ProgressProvider isLoading={props.isLoading}>
-        <ProgressBarComponent />
-      </ProgressProvider>
-    );
-  }
-
-  ProgressBarProvider.propTypes = {
-    isLoading: PropTypes.bool
-  };
-
-  return ProgressBarProvider;
+import { jsx as _jsx } from "react/jsx-runtime";
+import { ProgressProvider } from "../components/ProgressProvider";
+export function withProgress(WrappedComponent) {
+    const WrappedProgressBar = (props) => {
+        return (_jsx(ProgressProvider, { isLoading: props.isLoading, render: ({ progress }) => {
+                return _jsx(WrappedComponent, Object.assign({}, props, { progress: progress }));
+            } }));
+    };
+    return WrappedProgressBar;
 }
+//# sourceMappingURL=withProgress.js.map
